@@ -1,0 +1,58 @@
+{
+  "name": "@fictionking/n8n-nodes-hybrid-retriever",
+  "version": "0.1.0",
+  "description": "Advanced Hybrid Retriever node for n8n with Rerank support and Metadata passthrough",
+  "keywords": [
+    "n8n-community-node-package",
+    "n8n-nodes",
+    "langchain",
+    "ai",
+    "retriever",
+    "hybrid-search",
+    "rerank"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "fictionking",
+    "email": "fictionking@hotmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fictionking/n8n-nodes-hybrid-retriever.git"
+  },
+  "main": "index.js",
+  "n8n": {
+    "nodes": [
+      "dist/nodes/HybridRetriever/HybridRetriever.node.js",
+      "dist/nodes/HybridRetriever/HybridSearch.node.js"
+    ]
+  },
+  "scripts": {
+    "build": "tsc && npm run copy-files",
+    "dev": "tsc --watch",
+    "copy-files": "copyfiles -u 0 icons/**/* dist/ && copyfiles -u 1 nodes/**/*.json dist/",
+    "lint": "tslint -p tsconfig.json -c tslint.json",
+    "clean": "rimraf dist"
+  },
+  "files": [
+    "dist",
+    "index.js",
+    "package.json",
+    "README.md"
+  ],
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "copyfiles": "^2.4.1",
+    "n8n-workflow": "*",
+    "rimraf": "^5.0.0",
+    "tslint": "^6.1.2",
+    "typescript": "^5.0.0"
+  },
+  "peerDependencies": {
+    "n8n-workflow": "*"
+  },
+  "dependencies": {
+    "@langchain/core": "^0.3.18",
+    "langchain": "^0.3.6"
+  }
+}
