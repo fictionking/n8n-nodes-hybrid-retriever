@@ -1,6 +1,6 @@
 {
   "name": "@fictionking/n8n-nodes-hybrid-retriever",
-  "version": "0.3.3",
+  "version": "0.4.0",
   "description": "Advanced Hybrid Retriever node for n8n with Rerank support and Metadata passthrough",
   "keywords": [
     "n8n-community-node-package",
@@ -30,7 +30,7 @@
     ]
   },
   "scripts": {
-    "build": "tsc && npm run copy-files",
+    "build": "npm run clean && tsc && npm run copy-files",
     "dev": "tsc --watch",
     "copy-files": "copyfiles -u 0 icons/**/* dist/ && copyfiles -u 1 nodes/**/*.json dist/",
     "lint": "tslint -p tsconfig.json -c tslint.json",

@@ -1,13 +1,13 @@
 import {
-	IExecuteFunctions,
-	INodeExecutionData,
+	// IExecuteFunctions,
+	// INodeExecutionData,
 	INodeType,
 	INodeTypeDescription,
 	ISupplyDataFunctions,
 	SupplyData,
 } from 'n8n-workflow';
 import { createRetrieverTool } from 'langchain/tools/retriever';
-import { Document } from '@langchain/core/documents';
+// import { Document } from '@langchain/core/documents';
 import { buildHybridRetriever } from './utils';
 
 export class HybridTool implements INodeType {
@@ -19,6 +19,7 @@ export class HybridTool implements INodeType {
 		version: 1,
 		description: 'Wraps the Hybrid Retriever as a Tool for AI Agents.',
 		defaults: { name: 'Hybrid Retriever' },
+		usableAsTool: true,
 		inputs: [
 			// @ts-ignore
 			{ displayName: 'Retrievers', name: 'retrievers', type: 'ai_retriever', required: true },
@@ -73,58 +74,57 @@ export class HybridTool implements INodeType {
 			name: toolName,
 			description: toolDescription,
 		});
-
 		return {
 			response: tool,
 		};
 	}
 
-	async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
-		// 1. 获取输入数据
-		const items = this.getInputData();
-		const returnData: INodeExecutionData[] = [];
+	// async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
+	// 	// 1. 获取输入数据
+	// 	const items = this.getInputData();
+	// 	const returnData: INodeExecutionData[] = [];
 		
-		const textFieldsStr = this.getNodeParameter('textFields', 0) as string;
-		const textFields = textFieldsStr.split(',').map(s => s.trim()).filter(s => s);
+	// 	const textFieldsStr = this.getNodeParameter('textFields', 0) as string;
+	// 	const textFields = textFieldsStr.split(',').map(s => s.trim()).filter(s => s);
 
-		// 构建检索器
-		const retriever = await buildHybridRetriever(this, 0, 0, textFields);
+	// 	// 构建检索器
+	// 	const retriever = await buildHybridRetriever(this, 0, 0, textFields);
 
-		// 2. 遍历每一条输入数据
-		for (let i = 0; i < items.length; i++) {
-			const itemJson = items[i].json;
+	// 	// 2. 遍历每一条输入数据
+	// 	for (let i = 0; i < items.length; i++) {
+	// 		const itemJson = items[i].json;
 			
-			const query = (itemJson.query as string) || (itemJson.chatInput as string) || '';
+	// 		const query = (itemJson.query as string) || (itemJson.chatInput as string) || '';
 
-			if (!query) {
-				continue;
-			}
+	// 		if (!query) {
+	// 			continue;
+	// 		}
 
-			try {
-				// 执行检索
-				const docs = await retriever.invoke(query);
+	// 		try {
+	// 			// 执行检索
+	// 			const docs = await retriever.invoke(query);
 
-				// 格式化输出
-				const docItems = docs.map((doc: Document) => ({
-					json: {
-						pageContent: doc.pageContent,
-						metadata: doc.metadata,
-						// 把输入中的 toolCallId 带回去 (如果存在)，方便后续合并
-						_toolCallId: itemJson.toolCallId, 
-						_query: query 
-					},
-				}));
+	// 			// 格式化输出
+	// 			const docItems = docs.map((doc: Document) => ({
+	// 				json: {
+	// 					pageContent: doc.pageContent,
+	// 					metadata: doc.metadata,
+	// 					// 把输入中的 toolCallId 带回去 (如果存在)，方便后续合并
+	// 					_toolCallId: itemJson.toolCallId, 
+	// 					_query: query 
+	// 				},
+	// 			}));
 				
-				returnData.push(...docItems);
-			} catch (error) {
-				if (this.continueOnFail()) {
-					returnData.push({ json: { error: (error as Error).message } });
-				} else {
-					throw error;
-				}
-			}
-		}
+	// 			returnData.push(...docItems);
+	// 		} catch (error) {
+	// 			if (this.continueOnFail()) {
+	// 				returnData.push({ json: { error: (error as Error).message } });
+	// 			} else {
+	// 				throw error;
+	// 			}
+	// 		}
+	// 	}
 
-		return [returnData];
-	}
+	// 	return [returnData];
+	// }
 }
