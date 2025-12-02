@@ -8,9 +8,10 @@
 - **可选的重排序**：支持连接重排序模型以进一步优化检索结果
 - **元数据文本提取**：自动从文档元数据中提取文本内容，确保检索质量
 - **灵活的字段映射**：可配置从哪些元数据字段提取文本内容
-- **两种使用模式**：
+- **三种使用模式**：
   - 直接执行搜索并返回文档（Hybrid Search 节点）
   - 创建检索器对象供后续节点使用（Hybrid Retriever 节点）
+  - 创建 AI Agent 工具，将混合检索功能集成到 AI 代理工作流中（Hybrid Retriever Tool 节点）
 
 ## 包含的节点
 
@@ -44,6 +45,22 @@
 **输出**：
 - Retriever Object 输出：创建的混合检索器对象
 
+### 3. Hybrid Retriever Tool
+
+**功能**：将混合检索器包装为 AI Agent 工具，使 AI 代理能够使用混合检索功能。
+
+**输入**：
+- Retrievers 输入：连接一个或多个检索器节点
+- Rerank Model 输入（可选）：连接重排序模型节点
+
+**参数**：
+- Tool Name：工具名称，在代理中必须唯一，使用下划线代替空格
+- Tool Description：工具描述，AI 代理使用此描述决定何时使用该工具
+- Text Field Mapping：用于从元数据提取文本的字段列表（逗号分隔）
+
+**输出**：
+- Tool 输出：创建的 AI 工具对象，可连接到 AI Agent 节点
+
 ## 核心工作原理
 
 该节点包的核心功能是构建混合检索系统，主要包括以下步骤：
@@ -60,13 +77,13 @@
 
 ### 方法 1：直接安装（推荐）
 
-在 n8n 中，转到 "Settings > Community Nodes"，搜索并安装 `n8n-nodes-hybrid-retriever` 包。
+在 n8n 中，转到 "Settings > Community Nodes"，搜索并安装 `@fictionking/n8n-nodes-hybrid-retriever` 包。
 
 ### 方法 2：手动安装
 
 1. 克隆此仓库
 ```bash
-git clone https://github.com/your-username/n8n-nodes-hybrid-retriever.git
+git clone https://github.com/fictionking/n8n-nodes-hybrid-retriever.git
 cd n8n-nodes-hybrid-retriever
 ```
 
@@ -107,6 +124,16 @@ n8n start --dev
 3. 添加 Hybrid Retriever 节点
 4. 连接检索器和重排序节点
 5. 将 Hybrid Retriever 的输出连接到使用检索器的节点（如 AI Agent）
+
+### 示例 3：创建 AI Agent 工具
+
+1. 添加一个或多个检索器节点
+2. 添加一个可选的重排序节点
+3. 添加 Hybrid Retriever Tool 节点
+4. 配置工具名称和描述
+5. 连接检索器和重排序节点
+6. 将 Hybrid Retriever Tool 的输出连接到 AI Agent 节点的 Tools 输入端口
+7. AI 代理将能够根据需要使用该工具进行知识检索
 
 ## 配置字段说明
 

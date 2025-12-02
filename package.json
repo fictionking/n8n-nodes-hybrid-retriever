@@ -1,6 +1,6 @@
 {
   "name": "@fictionking/n8n-nodes-hybrid-retriever",
-  "version": "0.2.0",
+  "version": "0.3.1",
   "description": "Advanced Hybrid Retriever node for n8n with Rerank support and Metadata passthrough",
   "keywords": [
     "n8n-community-node-package",
@@ -25,7 +25,8 @@
     "n8nNodesApiVersion": 1,
     "nodes": [
       "dist/nodes/HybridRetriever/HybridRetriever.node.js",
-      "dist/nodes/HybridRetriever/HybridSearch.node.js"
+      "dist/nodes/HybridRetriever/HybridSearch.node.js",
+      "dist/nodes/HybridRetriever/HybridTool.node.js"
     ]
   },
   "scripts": {

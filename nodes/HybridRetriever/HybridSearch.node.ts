@@ -16,7 +16,7 @@ export class HybridSearch implements INodeType {
 			// @ts-ignore
 			{ displayName: 'Retrievers', type: 'ai_retriever', required: true },
 			// @ts-ignore
-			{ displayName: 'Rerank Model', type: 'ai_reranker', required: false },
+			{ displayName: 'Rerank Model', type: 'ai_reranker', required: false,maxConnections: 1 },
 		],
 		outputs: [
 			{ displayName: 'Documents', type: 'main' },
