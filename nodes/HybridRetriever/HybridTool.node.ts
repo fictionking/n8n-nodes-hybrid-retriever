@@ -18,7 +18,7 @@ export class HybridTool implements INodeType {
 		group: ['transform'],
 		version: 1,
 		description: 'Wraps the Hybrid Retriever as a Tool for AI Agents.',
-		defaults: { name: 'Hybrid Tool' },
+		defaults: { name: 'Hybrid Retriever' },
 		inputs: [
 			// @ts-ignore
 			{ displayName: 'Retrievers', name: 'retrievers', type: 'ai_retriever', required: true },

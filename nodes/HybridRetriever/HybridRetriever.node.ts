@@ -4,7 +4,7 @@ import { buildHybridRetriever } from './utils';
 export class HybridRetriever implements INodeType {
 	// ... (description 保持不变) ...
     description: INodeTypeDescription = {
-		displayName: 'Hybrid Retriever (Object)',
+		displayName: 'Hybrid Retriever',
 		name: 'hybridRetriever',
 		icon: 'file:../../icons/hybrid.png',
 		group: ['transform'],
