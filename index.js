@@ -15,6 +15,7 @@ module.exports = {
     require('./dist/nodes/HybridRetriever/HybridRetriever.node.js'),
     // Hybrid Search 节点
     require('./dist/nodes/HybridRetriever/HybridSearch.node.js'),
+    require('./dist/nodes/HybridRetriever/HybridTool.node.js'),
   ],
   // 从package.json动态获取版本号，避免硬编码
   version: require('./package.json').version,
@@ -23,8 +24,10 @@ module.exports = {
 // 为了保持兼容性，额外导出节点类
 const HybridRetrieverNode = require('./dist/nodes/HybridRetriever/HybridRetriever.node.js');
 const HybridSearchNode = require('./dist/nodes/HybridRetriever/HybridSearch.node.js');
+const HybridToolNode = require('./dist/nodes/HybridRetriever/HybridTool.node.js');
 
 // 兼容旧版n8n的直接节点类访问
 module.exports.HybridRetriever = HybridRetrieverNode.HybridRetriever;
 module.exports.HybridSearch = HybridSearchNode.HybridSearch;
+module.exports.HybridTool = HybridToolNode.HybridTool;
 
